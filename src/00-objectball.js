@@ -121,13 +121,11 @@ function deepIterator(target) {
     if (typeof target === "object") {
         for (const key in target) {
             deepIterator(target[key]);
-            //debugger
         }
     } else {
         console.log(target); 
     }
 };
-
 
 
 //W3 explains for...of pretty well. 
@@ -159,194 +157,24 @@ const isObject = (val) => {
     return typeof val === "object";
 };
 
-// const objectIterator = (key) => {
-//     for (const key in obj)
-// }
 
 const numPointsScored = (playerName) => {
     let playerNamePoints;
     const obj = gameObject();
     objectIterator(obj);
-    // debugger;
     function objectIterator(obj) {
         for (const key in obj) {
-           // debugger;
-            //let key;
-            if ( isObject(obj[key]) && key !== playerName ) //can probably remove parentheses around after &&, but get it working first == yes, works
-            {
-               // for (const key in obj) {
-                  // console.log(`if statement activated: ${obj[key]}`);
-                   // debugger;
+
+            if ( isObject(obj[key]) && key !== playerName ) {
+
                     objectIterator(obj[key]);
-              //  };
                 
             } else if (key === playerName) {
                     // console.log(`${playerName} has ${obj[key]["points"]} points!`);
-                   // debugger;
                     playerNamePoints = obj[key]["points"];
-            } // else {
-                    // console.log("else statement activated:");
-                   // debugger;
-                 //   console.log(obj[key]); }
+            }
         };
-    //return console.log
     };
     return playerNamePoints;
 };
-
-
-
-// if (objectIterator(obj) === playerName) {
-//     return obj[key]["points];
-// }
-
-        // const objectIterator = (obj) => {
-        //     for (const key in obj) {
-        //         if (isObject(obj[key])) {
-        //             objectIterator(obj);
-        //         }
-        //     }
-        // };
-
-        // const numPointsScored = (playerName) => {
-        //     const obj = gameObject();
-        //     objectIterator(obj);
-        //     debugger;
-        //     function objectIterator(obj) {
-        //         for (const key in obj) {
-        //             if (isObject(obj[key]) && (obj[key] !== playerName)) {
-        //                 debugger;
-        //                 objectIterator(obj[key]);
-        //             } else if (obj[key] === playerName) {
-        //                 debugger;
-        //                 console.log(`I found you: ${obj[key]["points"]}`);
-        //                 //return obj[key]["points"];
-        //             } else {
-        //                 debugger;
-        //                 console.log(obj[key]);}
-        
-        //         };
-        //     };
-        // };
-        
-        
-        
-        // if (objectIterator(obj) === playerName) {
-        //     return obj[key]["points];
-        // }
-        
-
-
-// messed up function. tried to move if statement. But check in debugger. maybe add some more break points.
-// function brokenNumPointsScored(playerName) {
-//     const obj = gameObject();
-
-//     const iterator = function(obj) { 
-//         if (typeof obj[key] === "object" && (key !== playerName) ) {
-
-//             Object.keys(obj).forEach(key => {
-//                 debugger;
-//                 iterator(obj[key]) 
-//                 } 
-//             );
-//         }
-//         else {return obj[key]["points"]};
-//     }
-// };
-
-        // // preserved function below before modifying to what is above
-        // function numPointsScored(playerName) {
-        //     const obj = gameObject();
-
-        //     iterator(obj);
-        //     function iterator(obj) { 
-        //     Object.keys(obj).forEach(key => {
-
-        //             if (typeof obj[key] === "object" && (key !== playerName) ) {
-        //                 debugger;
-        //                 iterator(obj[key]);
-        //             }
-        //             else {return obj[key]["points"]};
-        //         })
-        //     }
-        // };
-
-    // function numPointsScored(playerName) {
-    //     const obj = gameObject();
-    //     Object.keys(obj).forEach(key => {
-
-    //         if (key === playerName) {
-    //             return playerName.points;
-    //         }
-    //         else {
-    //             if (typeof )
-    //         }
-    //     }
-
-    //     )
-        
-    // }
-
-//  while (key !== playerName) {
-
-// function keyValueLookup(obj) {
-
-// }
-
-// function numPointsScored(playerName) {
-//     let playerPointsScored = gameObject();
-    
-//     for (const key in playerPointsScored) {
-
-//         console.log(playerPointsScored[]);
-//         debugger
-//     };
-    
-// };
-
-
-//     debugger
-//     for (const key in obj) {
-//         if (typeof obj[key] === "object") {
-            
-//         }
-//         console.log(key);
-//     };
-// };
-
-// gameObjectIterator();
-
-// function myDeepIterator(key) {
-    
-// }
-
-
-////////////////
-            // const isObject = (val) => {
-            //     if (val === null) {     // need this because if it happens to be null, null type is object
-            //         return false;
-            //     }
-
-            //     return typeof val === "object";
-            // };
-
-            // const numPointsScored = (obj) => {
-            //     for (const key in obj) {
-            //         if (isObject(obj[key]) && obj) {
-            //             numPointsScored(obj[key]);
-            //         } else if (obj[key] === ) {
-
-            //         } else {}
-
-            //     }
-            // };
-
-            // const objectIterator = (obj) => {
-            //     for (const key in obj) {
-            //         if (isObject(obj[key])) {
-                        
-            //         }
-            //     }
-            // }
-
 
