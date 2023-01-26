@@ -178,3 +178,18 @@ const numPointsScored = (playerName) => {
     return playerNamePoints;
 };
 
+const shoeSize = (playerName) => {
+    let playerShoeSize;
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && key !== playerName ) {
+                objectIterator(obj[key]);
+            } else if (key === playerName) {
+                playerShoeSize = obj[key]["shoe"];
+            }
+        };
+    };
+    return playerShoeSize;
+};
