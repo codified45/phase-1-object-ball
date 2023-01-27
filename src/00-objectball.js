@@ -249,3 +249,19 @@ const playerNumbers = (teamName) => {
     return arrayOfJerseyNumbersOnTeam;
 };
 
+// Build a function, playerStats, that takes in an argument of a player's name and returns an object of that player's stats. Check out the following example of the expected return value of the playerStats function:
+const playerStats = (playerName) => {
+    const obj = gameObject();
+    let playerStatObject = {};
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && key !== playerName ) {
+                objectIterator(obj[key]);
+            } else if (key === playerName) {
+                playerStatObject = obj[key];
+            };
+        };
+    };
+    return playerStatObject;
+};
