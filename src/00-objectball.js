@@ -315,4 +315,30 @@ const bigShoeRebounds = () => {
 };
 
 
+// Which player has the most points? Call the function mostPointsScored.
 
+// basically replicate above. one function finds highest points like largestShoeSize, the other outputs the [key] which will be the player name like in bigShoeRebounds 
+
+
+//Returns the highest amount of points scored by any player. 
+const highestPoints = () => {
+    let pointsAmount = 0;
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) ) {
+                objectIterator(obj[key]);
+            } else if (key === "points" && pointsAmount < obj[key]) {
+                pointsAmount = obj[key];
+            };
+        };
+    };
+    return pointsAmount;
+};
+
+
+// Returns name of player who scored the most points. 
+const mostPointsScored = () => {
+    
+};
