@@ -117,6 +117,7 @@ const gameObject = function() {
         return nbaTeams;
 };
 
+
 function deepIterator(target) {
     if (typeof target === "object") {
         for (const key in target) {
@@ -135,22 +136,24 @@ function gameObjectIterator() {
     deepIterator(obj);
 };
 
+
 function displayKeys(obj) {
     return Object.keys(obj);
-}
+};
+
 
 function keysIterator(obj) {
     Object.keys(obj).forEach(key => {
         console.log(`${key}`)
-        if (typeof obj[key] === "object") { //"&& obj[key] !== null" might be needed here after object
+        if (typeof obj[key] === "object" && obj[key] !== null) { // needed because typeof null returns "object"
         keysIterator(obj[key]);
         };
         })
 };
 
-
+// Determines if the value is an object. 
 const isObject = (val) => {
-    if (val === null) {     // need this because if it happens to be null, null type is object
+    if (val === null) {     // need this because if val happens to be null typeof null returns "object"
         return false;
     }
 
@@ -158,26 +161,26 @@ const isObject = (val) => {
 };
 
 
+// Build a function, numPointsScored that takes in an argument of a player's name and returns the number of points scored for that player.
 const numPointsScored = (playerName) => {
     let playerNamePoints;
     const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
-
             if ( isObject(obj[key]) && key !== playerName ) {
-
                     objectIterator(obj[key]);
-                
             } else if (key === playerName) {
                     // console.log(`${playerName} has ${obj[key]["points"]} points!`);
                     playerNamePoints = obj[key]["points"];
-            }
+            };
         };
     };
     return playerNamePoints;
 };
 
+
+// Build a function, shoeSize, that takes in an argument of a player's name and returns the shoe size for that player.
 const shoeSize = (playerName) => {
     let playerShoeSize;
     const obj = gameObject();
@@ -188,15 +191,16 @@ const shoeSize = (playerName) => {
                 objectIterator(obj[key]);
             } else if (key === playerName) {
                 playerShoeSize = obj[key]["shoe"];
-            }
+            };
         };
     };
     return playerShoeSize;
 };
 
+
 // Build a function, teamColors, that takes in an argument of the team name and returns an array of that teams colors.
 const teamColors = (teamName) => {
-    let teamColorsArray = []; // spread team color array
+    let teamColorsArray = []; // spread [team].colors array (below)
     const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
@@ -210,6 +214,7 @@ const teamColors = (teamName) => {
     };
     return teamColorsArray;
 };
+
 
 // Build a function, teamNames, that operates on the game object to return an array of the team names.
 const teamNames = () => {
@@ -227,6 +232,7 @@ const teamNames = () => {
     };
     return arrayOfTeamNames;
 };
+
 
 // Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey number's for that team.
 const playerNumbers = (teamName) => {
@@ -249,6 +255,7 @@ const playerNumbers = (teamName) => {
     return arrayOfJerseyNumbersOnTeam;
 };
 
+
 // Build a function, playerStats, that takes in an argument of a player's name and returns an object of that player's stats. Check out the following example of the expected return value of the playerStats function:
 const playerStats = (playerName) => {
     const obj = gameObject();
@@ -265,3 +272,5 @@ const playerStats = (playerName) => {
     };
     return playerStatObject;
 };
+
+
