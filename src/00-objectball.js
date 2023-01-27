@@ -118,6 +118,9 @@ const gameObject = function() {
 };
 
 
+const obj = gameObject();
+
+
 function deepIterator(target) {
     if (typeof target === "object") {
         for (const key in target) {
@@ -132,7 +135,6 @@ function deepIterator(target) {
 // W3 explains for...of pretty well. 
 // It should have been a for...in!
 function gameObjectIterator() {
-    const obj = gameObject();
     deepIterator(obj);
 };
 
@@ -151,6 +153,7 @@ function keysIterator(obj) {
         })
 };
 
+
 // Determines if the value is an object. 
 const isObject = (val) => {
     if (val === null) {     // need this because if val happens to be null typeof null returns "object"
@@ -164,7 +167,6 @@ const isObject = (val) => {
 // Build a function, numPointsScored that takes in an argument of a player's name and returns the number of points scored for that player.
 const numPointsScored = (playerName) => {
     let playerNamePoints;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -183,7 +185,6 @@ const numPointsScored = (playerName) => {
 // Build a function, shoeSize, that takes in an argument of a player's name and returns the shoe size for that player.
 const shoeSize = (playerName) => {
     let playerShoeSize;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -201,7 +202,6 @@ const shoeSize = (playerName) => {
 // Build a function, teamColors, that takes in an argument of the team name and returns an array of that teams colors.
 const teamColors = (teamName) => {
     let teamColorsArray = []; // spread [team].colors array (below)
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -219,7 +219,6 @@ const teamColors = (teamName) => {
 // Build a function, teamNames, that operates on the game object to return an array of the team names.
 const teamNames = () => {
     let arrayOfTeamNames = [];
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -237,7 +236,6 @@ const teamNames = () => {
 // Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey numbers for that team.
 const playerNumbers = (teamName) => {
     let arrayOfJerseyNumbersOnTeam = [];
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -258,7 +256,6 @@ const playerNumbers = (teamName) => {
 
 // Build a function, playerStats, that takes in an argument of a player's name and returns an object of that player's stats. 
 const playerStats = (playerName) => {
-    const obj = gameObject();
     let playerStatObject = {};
     objectIterator(obj);
     function objectIterator(obj) {
@@ -280,7 +277,6 @@ const playerStats = (playerName) => {
 const largestShoeSize = () => {
     // let largestShoeSizedPlayer;
     let shoeSize = 0;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -300,7 +296,6 @@ const largestShoeSize = () => {
 // Returns rebounds associated with the player that has the largest shoe size.
 const bigShoeRebounds = () => {
     let rebounds = 0;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -317,13 +312,9 @@ const bigShoeRebounds = () => {
 
 // Which player has the most points? Call the function mostPointsScored.
 
-// basically replicate above. one function finds highest points like largestShoeSize, the other outputs the [key] which will be the player name like in bigShoeRebounds 
-
-
 //Returns the highest amount of points scored by any player. 
 const highestPoints = () => {
     let pointsAmount = 0;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -341,7 +332,6 @@ const highestPoints = () => {
 // Returns name of player who scored the most points. 
 const mostPointsScored = () => {
     let playerName;
-    const obj = gameObject();
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
@@ -362,7 +352,6 @@ const mostPointsScored = () => {
 const largestShoeSize = () => {
     // let largestShoeSizedPlayer;
     let shoeSize = 0;
-    const obj = gameObject();
     objectIterator(obj);
     let playerKey;
     let previousKey;
