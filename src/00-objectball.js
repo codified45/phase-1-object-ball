@@ -210,3 +210,20 @@ const teamColors = (teamName) => {
     };
     return teamColorsArray;
 };
+
+// Build a function, teamNames, that operates on the game object to return an array of the team names.
+const teamNames = () => {
+    let arrayOfTeamNames = [];
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && key !== "teamName") {
+                objectIterator(obj[key]);
+            } else if (key === "teamName") {
+                arrayOfTeamNames.push(obj[key]);
+            };
+        };
+    };
+    return arrayOfTeamNames;
+};
