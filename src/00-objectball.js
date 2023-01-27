@@ -129,7 +129,7 @@ function deepIterator(target) {
 };
 
 
-//W3 explains for...of pretty well. 
+// W3 explains for...of pretty well. 
 // It should have been a for...in!
 function gameObjectIterator() {
     const obj = gameObject();
@@ -234,7 +234,7 @@ const teamNames = () => {
 };
 
 
-// Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey number's for that team.
+// Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey numbers for that team.
 const playerNumbers = (teamName) => {
     let arrayOfJerseyNumbersOnTeam = [];
     const obj = gameObject();
@@ -256,7 +256,7 @@ const playerNumbers = (teamName) => {
 };
 
 
-// Build a function, playerStats, that takes in an argument of a player's name and returns an object of that player's stats. Check out the following example of the expected return value of the playerStats function:
+// Build a function, playerStats, that takes in an argument of a player's name and returns an object of that player's stats. 
 const playerStats = (playerName) => {
     const obj = gameObject();
     let playerStatObject = {};
@@ -272,5 +272,47 @@ const playerStats = (playerName) => {
     };
     return playerStatObject;
 };
+
+
+// Build a function, bigShoeRebounds, that will return the number of rebounds associated with the player that has the largest shoe size.
+
+// Finds the largest shoe size a player in the object has.
+const largestShoeSize = () => {
+    // let largestShoeSizedPlayer;
+    let shoeSize = 0;
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) ) {
+                objectIterator(obj[key]);
+            } else if (key === "shoe" && shoeSize < obj[key]) {
+                    shoeSize = obj[key];
+                   // debugger;
+                   // largestShoeSizedPlayer = obj;
+            };
+        };
+    };
+    return shoeSize;
+};
+
+
+// Returns rebounds associated with the player that has the largest shoe size.
+const bigShoeRebounds = () => {
+    let rebounds = 0;
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && obj[key]["shoe"] !== largestShoeSize()) {
+                objectIterator(obj[key]);
+            } else if (obj[key]["shoe"] === largestShoeSize()) {
+                    rebounds = obj[key]["rebounds"]; // need obj in front of [key]
+            };
+        };
+    };
+    return rebounds;
+};
+
 
 
