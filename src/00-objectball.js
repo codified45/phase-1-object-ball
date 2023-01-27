@@ -340,5 +340,18 @@ const highestPoints = () => {
 
 // Returns name of player who scored the most points. 
 const mostPointsScored = () => {
-    
+    let playerName;
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && obj[key]["points"] !== highestPoints() ) {
+                objectIterator(obj[key]);
+            } else if (obj[key]["points"] === highestPoints()) {
+                playerName = key;
+            };
+        };
+    };
+    return playerName;
 };
+
