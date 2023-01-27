@@ -355,3 +355,32 @@ const mostPointsScored = () => {
     return playerName;
 };
 
+
+/* Code that I worked on with Demetrio:
+
+// Finds the largest shoe size a player in the object has.
+const largestShoeSize = () => {
+    // let largestShoeSizedPlayer;
+    let shoeSize = 0;
+    const obj = gameObject();
+    objectIterator(obj);
+    let playerKey;
+    let previousKey;
+    function objectIterator(obj) {
+        for (const firstOrderKey in obj) {
+            
+            if ( isObject(obj[firstOrderKey]) ) {
+                previousKey = firstOrderKey;
+                objectIterator(obj[firstOrderKey]);
+            } else if (key === "shoe" && shoeSize < obj[key]) {
+                    playerKey = previousKey;
+                    shoeSize = obj[key];
+                   // debugger;
+                   // largestShoeSizedPlayer = obj;
+            };
+        };
+    };
+    return shoeSize;
+};
+
+*/
