@@ -193,3 +193,20 @@ const shoeSize = (playerName) => {
     };
     return playerShoeSize;
 };
+
+// Build a function, teamColors, that takes in an argument of the team name and returns an array of that teams colors.
+const teamColors = (teamName) => {
+    let teamColorsArray = []; // spread team color array
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && key !== "colors") {
+                objectIterator(obj[key]);
+            } else if (key === "colors" && obj["teamName"] === teamName) {
+                teamColorsArray = [...obj["colors"]];
+            };
+        };
+    };
+    return teamColorsArray;
+};
