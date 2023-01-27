@@ -227,3 +227,25 @@ const teamNames = () => {
     };
     return arrayOfTeamNames;
 };
+
+// Build a function, playerNumbers, that takes in an argument of a team name and returns an array of the jersey number's for that team.
+const playerNumbers = (teamName) => {
+    let arrayOfJerseyNumbersOnTeam = [];
+    const obj = gameObject();
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && key !== "teamName" ) {
+                objectIterator(obj[key]);
+            } else if (key === "teamName" && obj[key] === teamName) {
+                const innerObj = obj["players"];
+                for (const innerKey in innerObj) {
+                    arrayOfJerseyNumbersOnTeam.push(innerObj[innerKey].number);
+                    debugger;
+                };
+            };
+        };
+    };
+    return arrayOfJerseyNumbersOnTeam;
+};
+
