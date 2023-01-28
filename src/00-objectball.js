@@ -262,7 +262,7 @@ const largestShoeSize = () => {
     };
     return shoeSize;
 };
-
+// largestShoeSize()  => 19
 
 
 // Returns rebounds associated with the player that has the largest shoe size.
@@ -271,55 +271,53 @@ const bigShoeRebounds = () => {
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
-            if ( isObject(obj[key]) && obj[key]["shoe"] !== largestShoeSize()) {
+            if ( isObject(obj[key]) && obj[key]["shoe"] !== largestShoeSize() ) {
                 objectIterator(obj[key]);
-            } else if (obj[key]["shoe"] === largestShoeSize()) {
+            } else if ( obj[key]["shoe"] === largestShoeSize() ) {
                     rebounds = obj[key]["rebounds"]; // need obj in front of [key]
             };
         };
     };
     return rebounds;
 };
+// bigShoeRebounds()  => 12
 
 
 // ** Bonus Questions:
-// Which player has the most points? Call the function mostPointsScored.
+// Which player has the most points?  Call the function mostPointsScored.
 
 //Returns the highest amount of points scored by any player. 
-const highestPoints = () => {
-    let pointsAmount = 0;
-    objectIterator(obj);
-    function objectIterator(obj) {
-        for (const key in obj) {
-            if ( isObject(obj[key]) ) {
-                objectIterator(obj[key]);
-            } else if (key === "points" && pointsAmount < obj[key]) {
-                pointsAmount = obj[key];
-            };
-        };
+const bestHighestPoints = (obj, key, statCounter) => {
+    if (key === "points" && statCounter < obj[key]) {
+        statCounter = obj[key];
     };
-    return pointsAmount;
+    return statCounter;
 };
+// bestObjectIterator(obj, bestHighestPoints)  => 33
 
 
-// Old, working mostPointsScored function
 // Returns name of player who scored the most points. 
 const mostPointsScored = () => {
-    let playerName;
+    const highestScore = bestObjectIterator(obj, bestHighestPoints);
+    let playerName; 
     objectIterator(obj);
     function objectIterator(obj) {
         for (const key in obj) {
-            if ( isObject(obj[key]) && obj[key]["points"] !== highestPoints() ) {
+            if ( isObject(obj[key]) && obj[key]["points"] !== highestScore ) {
                 objectIterator(obj[key]);
-            } else if ( obj[key]["points"] === highestPoints() ) {
+            } else if ( obj[key]["points"] === highestScore ) {
                 playerName = key;
             };
         };
     };
     return playerName;
 };
+// mostPointsScored()  => 'Ben Gordon'
 
 
+// Which team has the most points? Call the function winningTeam.  
+
+// Seperates the two Team objects
 const homeTeam = obj.home;
 const awayTeam = obj.away;
 
@@ -339,6 +337,7 @@ const homeTeamPoints = () => {
     };
     return points;
 };
+// homeTeamPoints()  => 96
 
 
 // Finds amount of points the Away team scored. 
@@ -356,6 +355,7 @@ const awayTeamPoints = () => {
     };
     return points;
 };
+// awayTeamPoints()  => 85
 
 
 // Which team has the most points? Call the function winningTeam.
@@ -363,14 +363,17 @@ const winningTeam = () => {
     let thisTeamWon = ( homeTeamPoints() > awayTeamPoints() ) ? homeTeam.teamName:awayTeam.teamName;
     return thisTeamWon;
 };
+// winningTeam()  => 'Brooklyn Nets'
 
 
+// Which player has the longest name? Call the function playerWithLongestName.  
 const putAllPlayerNamesIntoArray = () => {
     const homePlayerNames = Object.getOwnPropertyNames(obj.home.players);
     const awayPlayerNames = Object.getOwnPropertyNames(obj.away.players);
     const arrayOfAllPlayerNames = [...homePlayerNames, ...awayPlayerNames];
     return arrayOfAllPlayerNames;
 };
+// putAllPlayerNamesIntoArray()  => ['Alan Anderson', 'Reggie Evans', 'Brook Lopez', 'Mason Plumlee', 'Jason Terry', 'Jeff Adrien', 'Bismak Biyombo', 'DeSagna Diop', 'Ben Gordon', 'Brendan Haywood']
 
 
 const nameArray = putAllPlayerNamesIntoArray();
@@ -388,31 +391,11 @@ const playerWithLongestName = () => {
     };
     return longestName;
 };
+// playerWithLongestName()  => 'Brendan Haywood'
 
 
-/*  // Didn't need to be so complicated:
-
-    const playerWithLongestName = () => {
-        let longestNamedPlayer;
-        let nameLength;
-        let previousKey;
-        objectIterator(obj);
-        function objectIterator(obj) {
-            for (const firstOrderKey in obj) {
-                if ( isObject(obj[firstOrderKey]) ) {
-                    previousKey = firstOrderKey;
-                    objectIterator(obj[firstOrderKey]);
-                } else if () {};
-            };
-        };
-        return longestNamedPlayer;
-    };
-
-*/
-
-
-// Super Bonus: 
-// Write a function that returns true if the player with the longest name had the most steals. Call the function doesLongNameStealATon.
+// **** Super Bonus: 
+// Write a function that returns true if the player with the longest name had the most steals. Call the function doesLongNameStealATon.  
 const mostStealsAmount = () => {
     let stealAmount = 0;
     objectIterator(obj);
@@ -447,11 +430,7 @@ const doesLongNameStealATon = () => {
 };
 
 
-
-
-
-
-// Personal Challenge 1: Create a maxBy() function where you can find the maximum value of any of the "players" objects properties. You choose which property to max by passing the property as a parameter in the form of a string.     
+// ****** Personal Challenge 1: Create a maxBy() function where you can find the maximum value of any of the "players" objects properties. You choose which property to max by passing the property as a parameter in the form of a string.     
 const maxBy = (property) => {
     let propertyAmount = 0;
     objectIterator(obj);
@@ -469,7 +448,8 @@ const maxBy = (property) => {
 
 
 // This one is even better:
-// how to pass parameter to function without calling the function?
+// How do you pass a bestMaxBy(parameter) to bestObjectIterator() without immediately calling bestMaxBy()?
+// You do it as an extra parameter that the other functions don't care about.  
 // like this: 
 const bestMaxBy = (obj, key, statCounter, targetPlayerProperty) => {
     if (key === targetPlayerProperty && statCounter < obj[key]) {
@@ -477,7 +457,7 @@ const bestMaxBy = (obj, key, statCounter, targetPlayerProperty) => {
     };
     return statCounter;
 };
-// bestObjectIterator(obj, bestMaxBy, "number")     => 33
+// bestObjectIterator(obj, bestMaxBy, "number")     => 33       // I assume a callback would work as well.
 // bestObjectIterator(obj, bestMaxBy, "shoe")       => 19
 // bestObjectIterator(obj, bestMaxBy, "points")     => 33
 // bestObjectIterator(obj, bestMaxBy, "rebounds")   => 19
@@ -487,9 +467,7 @@ const bestMaxBy = (obj, key, statCounter, targetPlayerProperty) => {
 // bestObjectIterator(obj, bestMaxBy, "slamDunks")  => 15
 
 
-
-
-// Personal Challenge 2: Create an objectIterator that accepts 2 arguments: One of the object and one of the function which represents the if/else if block that changes. I added a 3rd argument for bestMaxBy().
+// ******** Personal Challenge 2: Create an objectIterator that accepts 2 arguments: One of the object and one of the function which represents the if/else if block that changes. I added a 3rd argument for bestMaxBy().
 
 
 // This can probably be improved since the way it is right now it will always drill down to the values of every nested object.  If you want to stop at a specific object along the way you would need to modify or build a new function. 
@@ -507,13 +485,6 @@ const bestObjectIterator = (obj, func, targetPlayerProperty) => {
 };
 
 
-const improvedMostStealsAmount = (obj, key) => {
-    if (key === "steals" && globalStatCounter < obj[key]) {
-        globalStatCounter = obj[key];
-    };
-};
-
-
 const bestMostStealsAmount = (obj, key, statCounter) => {
     if (key === "steals" && statCounter < obj[key]) {
         statCounter = obj[key];
@@ -521,15 +492,41 @@ const bestMostStealsAmount = (obj, key, statCounter) => {
     return statCounter;
 };
 
-const bestHighestPoints = (obj, key, statCounter) => {
-    if (key === "points" && statCounter < obj[key]) {
-        statCounter = obj[key];
+
+                    /*** Older Iterations of Used Functions ***/
+
+const highestPoints = () => {
+    let pointsAmount = 0;
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) ) {
+                objectIterator(obj[key]);
+            } else if (key === "points" && pointsAmount < obj[key]) {
+                pointsAmount = obj[key];
+            };
+        };
     };
-    return statCounter;
+    return pointsAmount;
 };
 
 
-                    /*** Older Iterations of Used Functions ***/
+// Old, working mostPointsScored function. My Chrome debugger broke at one point and I deleted some (probably) working code on a more streamlined function.  
+const oldPointsScored = () => {
+    let playerName;
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) && obj[key]["points"] !== highestPoints() ) {
+                objectIterator(obj[key]);
+            } else if ( obj[key]["points"] === highestPoints() ) {
+                playerName = key;
+            };
+        };
+    };
+    return playerName;
+};
+// oldPointsScored()  => 'Ben Gordon'
 
 
 let globalStatCounter = 0; // //Might not be a good idea if functions are running parallel. 
@@ -549,6 +546,15 @@ const newObjectIterator = (obj, func) => {
     };
     return globalStatCounter;
 };
+// newObjectIterator(obj, improvedMostStealsAmount)  => 22
+
+
+const improvedMostStealsAmount = (obj, key) => {
+    if (key === "steals" && globalStatCounter < obj[key]) {
+        globalStatCounter = obj[key];
+    };
+};
+// newObjectIterator(obj, improvedMostStealsAmount)  => 22
 
 
                     /*** Unused functions ***/
@@ -615,13 +621,32 @@ function keysIterator(obj) {
 
 
 // put this where you want to pass it as argument without invoking the function
-    // const callBackFunc = () => {
-    //     bestMaxBy(obj, key, statCounter, targetPlayerProperty);
-    // };
+        // const callBackFunc = () => {
+        //     bestMaxBy(obj, key, statCounter, targetPlayerProperty);
+        // };
 
-    // callFunction(callbackFunc)
-    
-    // don't need a callback actually. Just passed an extra parameter which the other functions should ignore. 
+        // callFunction(callbackFunc)
+        
+        // don't need a callback actually. Just passed an extra parameter which the other functions should ignore. 
 
 
-                    
+/*  
+    // Didn't need to be so complicated:
+
+    const playerWithLongestName = () => {
+        let longestNamedPlayer;
+        let nameLength;
+        let previousKey;
+        objectIterator(obj);
+        function objectIterator(obj) {
+            for (const firstOrderKey in obj) {
+                if ( isObject(obj[firstOrderKey]) ) {
+                    previousKey = firstOrderKey;
+                    objectIterator(obj[firstOrderKey]);
+                } else if () {};
+            };
+        };
+        return longestNamedPlayer;
+    };
+
+*/
