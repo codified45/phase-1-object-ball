@@ -284,8 +284,6 @@ const largestShoeSize = () => {
                 objectIterator(obj[key]);
             } else if (key === "shoe" && shoeSize < obj[key]) {
                     shoeSize = obj[key];
-                   // debugger;
-                   // largestShoeSizedPlayer = obj;
             };
         };
     };
@@ -328,7 +326,21 @@ const highestPoints = () => {
     return pointsAmount;
 };
 
+    // const mostPointsScored = () => {
+    //     let playerName;
+    //     objectIterator(obj);
+    //             if ( isObject(obj[key]) && obj[key]["points"] !== highestPoints() ) {
+    //                 objectIterator(obj[key]);
+    //             } else if (obj[key]["points"] === highestPoints()) {
+    //                 playerName = key;
+    //             };
+    //     return playerName;
+    // };
 
+ // objectIterator(obj, mostPointsScored);
+
+
+// Old, working mostPointsScored function
 // Returns name of player who scored the most points. 
 const mostPointsScored = () => {
     let playerName;
@@ -346,7 +358,119 @@ const mostPointsScored = () => {
 };
 
 
+// Pretty sure something is wrong here..... tried building objectIterator with two parameters
+    // function objectIterator(obj, ifElseIfFunction) {
+    //     for (const key in obj) {
+    //         ifElseIfFunction();
+    //     };
+    // };
+
+
+const homeTeam = obj.home;
+const awayTeam = obj.away;
+
+
+// Finds amount of points the Home team scored. 
+const homeTeamPoints = () => {
+    let points = 0;
+    objectIterator(homeTeam);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) ) {
+                objectIterator(obj[key]);
+            } else if (key === "points") {
+                points += obj[key];
+            };
+        };
+    };
+    return points;
+};
+
+
+// Finds amount of points the Away team scored. 
+const awayTeamPoints = () => {
+    let points = 0;
+    objectIterator(awayTeam);
+    function objectIterator(obj) {
+        for (const key in obj) {
+            if ( isObject(obj[key]) ) {
+                objectIterator(obj[key]);
+            } else if (key === "points") {
+                points += obj[key];
+            };
+        };
+    };
+    return points;
+};
+
+
+// Which team has the most points? Call the function winningTeam.
+const winningTeam = () => {
+    let thisTeamWon = ( homeTeamPoints() > awayTeamPoints() ) ? homeTeam.teamName:awayTeam.teamName;
+    return thisTeamWon;
+};
+
+
+const putAllPlayerNamesIntoArray = () => {
+    const homePlayerNames = Object.getOwnPropertyNames(obj.home.players);
+    const awayPlayerNames = Object.getOwnPropertyNames(obj.away.players);
+    const arrayOfAllPlayerNames = [...homePlayerNames, ...awayPlayerNames];
+    return arrayOfAllPlayerNames;
+};
+
+
+const nameArray = putAllPlayerNamesIntoArray();
+
+
+// Which player has the longest name? Call the function playerWithLongestName.
+const playerWithLongestName = () => {
+    let longestName;
+    let nameLength = 0;
+    for (const element of nameArray) {
+        if (element.length > nameLength) {
+            nameLength = element.length;
+            debugger;
+            longestName = element;
+        };
+    };
+    return longestName;
+};
+
+
+// key.lengthOf()
+
+
+/*  // Didn't need to be so complicated.
+
+// Which player has the longest name? Call the function playerWithLongestName.
+const playerWithLongestName = () => {
+    let longestNamedPlayer;
+    let nameLength;
+    let previousKey;
+    objectIterator(obj);
+    function objectIterator(obj) {
+        for (const firstOrderKey in obj) {
+            if ( isObject(obj[firstOrderKey]) ) {
+                previousKey = firstOrderKey;
+                objectIterator(obj[firstOrderKey]);
+            } else if (1) {
+
+            };
+        };
+    };
+    return longestNamedPlayer;
+};
+
+*/
+
+
+// Super Bonus: 
+// Write a function that returns true if the player with the longest name had the most steals. Call the function doesLongNameStealATon.
+
+
+
 /* Code that I worked on with Demetrio:
+// it is for grabbing the string that represents the object that has the largest shoe size (the players name). Need a higher order key + variables in appropriate scope to access the string needed after iterating through it.  
 
 // Finds the largest shoe size a player in the object has.
 const largestShoeSize = () => {
