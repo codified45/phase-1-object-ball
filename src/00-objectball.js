@@ -118,7 +118,7 @@ const gameObject = function() {
 };
 
 
-const obj = gameObject();
+const obj = gameObject();  // done so that a new gameObject was created every time a function ran, to protect against mutating the original data.  
 
 
 // Determines if the value is an object. For iterating through nested objects.  
